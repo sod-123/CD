@@ -1,34 +1,185 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Readable Login Form</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(to right, #4facfe, #00f2fe);
+        }
+
+        .login-container{
+            width:350px;
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .login-container h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#333;
+        }
+
+        .input-group{
+            margin-bottom:18px;
+        }
+
+        .input-group label{
+            display:block;
+            margin-bottom:6px;
+            font-weight:bold;
+            color:#555;
+        }
+
+        .input-group input{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:16px;
+        }
+
+        .input-group input:focus{
+            border-color:#4facfe;
+            outline:none;
+        }
+
+        .login-btn{
+            width:100%;
+            padding:12px;
+            background:#4facfe;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .login-btn:hover{
+            background:#008cdd;
+        }
+
+        .message{
+            margin-top:15px;
+            text-align:center;
+            font-weight:bold;
+        }
+
+        .success{
+            color:green;
+        }
+
+        .error{
+            color:red;
+        }
+
+        .footer-text{
+            text-align:center;
+            margin-top:15px;
+            color:#666;
+            font-size:14px;
+        }
+
+        .footer-text a{
+            text-decoration:none;
+            color:#4facfe;
+        }
+    </style>
 </head>
 <body>
+
     <div class="login-container">
-        <form action="login_process.php" method="POST">
-            <h2>Login</h2>
-            
+
+        <h2>Login Form</h2>
+
+        <form id="loginForm">
+
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter Username" required>
+
+                <input 
+                    type="text" 
+                    id="username" 
+                    placeholder="Enter username"
+                >
             </div>
 
             <div class="input-group">
                 <label for="password">Password</label>
-                <!-- Using type="password" masks the characters -->
-                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="Enter password"
+                >
             </div>
 
-            <button type="submit" class="login-btn">Login</button>
+            <button type="submit" class="login-btn">
+                Login
+            </button>
 
-            <div class="extra-links">
-                <a href="#">Forgot Password?</a>
-                <span>Don't have an account? <a href="#">Sign up</a></span>
-            </div>
+            <div id="message" class="message"></div>
+
         </form>
+
+        <div class="footer-text">
+            Don't have an account?
+            <a href="#">Register</a>
+        </div>
+
     </div>
+
+    <script>
+
+        // Access form and message area
+        const loginForm = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+
+        // Add submit event
+        loginForm.addEventListener("submit", function(event){
+
+            // Prevent page refresh
+            event.preventDefault();
+
+            // Get entered values
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Validation
+            if(username === "" || password === ""){
+
+                message.textContent = "Please fill all fields";
+                message.className = "message error";
+
+            }
+            else{
+
+                message.textContent = "Login successful!";
+                message.className = "message success";
+
+            }
+
+        });
+
+    </script>
+
 </body>
 </html>
+```
